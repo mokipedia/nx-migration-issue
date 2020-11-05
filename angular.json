@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "",
   "projects": {
     "nx-migration": {
       "projectType": "application",
@@ -10,25 +10,25 @@
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/nx-migration",
+      "sourceRoot": "apps/nx-migration/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/nx-migration",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/apps/nx-migration",
+            "index": "apps/nx-migration/src/index.html",
+            "main": "apps/nx-migration/src/main.ts",
+            "polyfills": "apps/nx-migration/src/polyfills.ts",
+            "tsConfig": "apps/nx-migration/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/nx-migration/src/favicon.ico",
+              "apps/nx-migration/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "apps/nx-migration/src/styles.scss"
             ],
             "scripts": []
           },
@@ -36,8 +36,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/nx-migration/src/environments/environment.ts",
+                  "with": "apps/nx-migration/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -83,16 +83,16 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "main": "apps/nx-migration/src/test.ts",
+            "polyfills": "apps/nx-migration/src/polyfills.ts",
+            "tsConfig": "apps/nx-migration/tsconfig.spec.json",
+            "karmaConfig": "apps/nx-migration/karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/nx-migration/src/favicon.ico",
+              "apps/nx-migration/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "apps/nx-migration/src/styles.scss"
             ],
             "scripts": []
           }
@@ -101,19 +101,24 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "apps/nx-migration/tsconfig.app.json",
+              "apps/nx-migration/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
-        },
+        }
+      }
+    },
+    "nx-migration-e2e": {
+      "projectType": "application",
+      "root": "apps/nx-migration-e2e",
+      "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
+            "protractorConfig": "apps/nx-migration-e2e/protractor.conf.js",
             "devServerTarget": "nx-migration:serve"
           },
           "configurations": {
@@ -121,8 +126,21 @@
               "devServerTarget": "nx-migration:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/nx-migration-e2e/tsconfig.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
         }
       }
-    }},
-  "defaultProject": "nx-migration"
+    }
+  },
+  "defaultProject": "nx-migration",
+  "cli": {
+    "analytics": false
+  }
 }
